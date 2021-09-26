@@ -24,7 +24,7 @@ AIRTABLE_TABLE_NAME = os.environ.get("AIRTABLE_TABLE_NAME")
 
 @app.get("/")
 def home_view(request: Request):
-    print(AIRTABLE_API_KEY)
+
     return templates.TemplateResponse("home.html", {"request": request})
 
 @app.post("/")
@@ -35,5 +35,5 @@ def home_signup_view(request: Request, email:str = Form(...)):
         table_name=AIRTABLE_TABLE_NAME
     )
     did_send = airtable_client.create_records({"Email":email})
-    print(did_send)
+
     return templates.TemplateResponse("home.html", {"request": request, "submitted_email": email, "did_send": did_send})
